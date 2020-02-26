@@ -41,10 +41,22 @@ public class SumTrees {
     public static TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
         TreeNode resultTree = mergeNodes(t1, t2);
         if (hasLeftAtLeastOneOf(t1, t2)) {
-            resultTree.left = mergeTrees(t1.left, t2.left);
+            if (t1.left != null && t2.left != null) {
+                resultTree.left = mergeTrees(t1.left, t2.left);
+            } else if (t1.left == null && t2.left != null) {
+                resultTree.left = mergeTrees(new TreeNode(0), t2.left);
+            } else if (t1.left != null && t2.left == null) {
+                resultTree.left = mergeTrees(t1.left, new TreeNode(0));
+            }
         }
         if (hasRightAtLeastOneOf(t1, t2)) {
-            resultTree.right = mergeTrees(t1.right, t2.right);
+            if (t1.right != null && t2.right != null) {
+                resultTree.right = mergeTrees(t1.right, t2.right);
+            } else if (t1.right == null && t2.right != null) {
+                resultTree.right = mergeTrees(new TreeNode(0), t2.right);
+            } else if (t1.right != null && t2.right == null) {
+                resultTree.right = mergeTrees(t1.right, new TreeNode(0));
+            }
         }
         return resultTree;
     }
@@ -57,10 +69,8 @@ public class SumTrees {
         if (t1.left != null && t2.left != null) {
             return true;
         } else if (t1.left == null && t2.left != null) {
-            t1.left = new TreeNode(0);
             return true;
         } else if (t2.left == null && t1.left != null) {
-            t2.left = new TreeNode(0);
             return true;
         }
         return false;
@@ -70,10 +80,8 @@ public class SumTrees {
         if (t1.right != null && t2.right != null) {
             return true;
         } else if (t1.right == null && t2.right != null) {
-            t1.right = new TreeNode(0);
             return true;
         } else if (t2.right == null && t1.right != null) {
-            t2.right = new TreeNode(0);
             return true;
         }
         return false;
