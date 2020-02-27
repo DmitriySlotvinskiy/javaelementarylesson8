@@ -66,24 +66,18 @@ public class SumTrees {
     }
 
     private static boolean hasLeftAtLeastOneOf(TreeNode t1, TreeNode t2) {
-        if (t1.left != null && t2.left != null) {
+        if (t1.left != null || t2.left != null) {
             return true;
-        } else if (t1.left == null && t2.left != null) {
-            return true;
-        } else if (t2.left == null && t1.left != null) {
-            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     private static boolean hasRightAtLeastOneOf(TreeNode t1, TreeNode t2) {
-        if (t1.right != null && t2.right != null) {
+        if (t1.right != null || t2.right != null) {
             return true;
-        } else if (t1.right == null && t2.right != null) {
-            return true;
-        } else if (t2.right == null && t1.right != null) {
-            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
